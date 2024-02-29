@@ -1,32 +1,17 @@
-import { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
+import { Account } from "./Account";
+import { LangSwitcher } from "./LangSwitcher";
 
 function App() {
-  const [mer, setMer] = useState("loh");
-
-  const [clicks, setClicks] = useState(0);
-  const [text, setText] = useState("value is not 10");
-  const increment = () => {
-    setClicks(clicks + 1);
-  };
-
-  const decrement = () => {
-    setClicks(clicks - 1);
-  };
-
-  useEffect(() => {
-    if (clicks === 10) {
-      setText("It`s 10!!!");
-    } else {
-      setText("value is not 10");
-    }
-  }, [clicks]);
+  const lang = useSelector((state) => state.locale.lang);
 
   return (
     <div className="App">
-      <h1>{clicks}</h1>
-      <button onClick={increment}>Increment</button>
-      <p>{text}</p>
-      <button onClick={decrement}>Decrement</button>
+      <LangSwitcher />
+      <Account />
+      <p>
+        <b>Selected lang {lang}</b>
+      </p>
     </div>
   );
 }
